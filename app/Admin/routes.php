@@ -16,4 +16,6 @@ Route::group([
     $router->resource('users', UserController::class);
     //商品管理
     $router->resource('goods', GoodsController::class);
+    //分类管理
+    $router->resource('cate', CateController::class);
 });
