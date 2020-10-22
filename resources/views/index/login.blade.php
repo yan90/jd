@@ -52,6 +52,7 @@
 									<input name="m1" type="checkbox" value="2" checked=""> 
 									自动登录
 									</label>
+									<a href="https://github.com/login/oauth/authorize?client_id=53dc6bc017e4551194a8">GITHUB登录</a>
 									<span class="forget">忘记密码？</span>
 								</div>
 								<div class="logined">

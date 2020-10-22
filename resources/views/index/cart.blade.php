@@ -44,6 +44,7 @@
 						<input type="checkbox" name="" id="" value="" />
 						<span class="shopname self">传智自营</span>
 					</div>
+					@foreach($list as $v)
 					<div class="cart-body">
 						<div class="cart-list">
 							<ul class="goods-list yui3-g">
@@ -51,148 +52,31 @@
 									<input type="checkbox" name="" id="" value="" />
 								</li>
 								<li class="yui3-u-11-24">
+
 									<div class="good-item">
-										<div class="item-img"><img src="/static/img/goods.png" /></div>
-										<div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存
-											尺寸：13.3英寸</div>
+										<div class="item-img"><img src="/upload/{{$v->goods_img}}" /></div>
+										<div class="item-msg">{{$v->goods_name}}</div>
 									</div>
 								</li>
-								
-								<li class="yui3-u-1-8"><span class="price">8848.00</span></li>
+
+								<li class="yui3-u-1-8"><span class="price"></span>{{$v->goods_price}}</li>
 								<li class="yui3-u-1-8">
 									<a href="javascript:void(0)" class="increment mins">-</a>
 									<input autocomplete="off" type="text" value="1" minnum="1" class="itxt" />
 									<a href="javascript:void(0)" class="increment plus">+</a>
 								</li>
-								<li class="yui3-u-1-8"><span class="sum">8848.00</span></li>
+								<li class="yui3-u-1-8"><span class="sum">{{$v->goods_price}}</span></li>
 								<li class="yui3-u-1-8">
-									<a href="#none">删除</a><br />
+									<a href="{{url('/index/delete/'.$v->goods_id)}}">删除</a><br />
 									<a href="#none">移到我的关注</a>
 								</li>
 							</ul>
 						</div>
-						<div class="cart-list">
-							<ul class="goods-list yui3-g">
-								<li class="yui3-u-1-24">
-									<input type="checkbox" name="" id="" value="" />
-								</li>
-								<li class="yui3-u-11-24">
-									<div class="good-item">
-										<div class="item-img"><img src="/static/img/goods.png" /></div>
-										<div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存
-											尺寸：13.3英寸</div>
-									</div>
-								</li>
-								
-								<li class="yui3-u-1-8"><span class="price">8848.00</span></li>
-								<li class="yui3-u-1-8">
-									<a href="javascript:void(0)" class="increment mins">-</a>
-									<input autocomplete="off" type="text" value="1" minnum="1" class="itxt" />
-									<a href="javascript:void(0)" class="increment plus">+</a>
-								</li>
-								<li class="yui3-u-1-8"><span class="sum">8848.00</span></li>
-								<li class="yui3-u-1-8">
-									<a href="#none">删除</a><br />
-									<a href="#none">移到我的关注</a>
-								</li>
-							</ul>
-						</div>
-						<div class="cart-list">
-							<ul class="goods-list yui3-g">
-								<li class="yui3-u-1-24">
-									<input type="checkbox" name="" id="" value="" />
-								</li>
-								<li class="yui3-u-11-24">
-									<div class="good-item">
-										<div class="item-img"><img src="/static/img/goods.png" /></div>
-										<div class="item-msg">
-											Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存
-											尺寸：13.3英寸
-										</div>
-									</div>
-								</li>
-								
-								<li class="yui3-u-1-8"><span class="price">8848.00</span></li>
-								<li class="yui3-u-1-8">
-									<a href="javascript:void(0)" class="increment mins">-</a>
-									<input autocomplete="off" type="text" value="1" minnum="1" class="itxt" />
-									<a href="javascript:void(0)" class="increment plus">+</a>
-								</li>
-								<li class="yui3-u-1-8"><span class="sum">8848.00</span></li>
-								<li class="yui3-u-1-8">
-									<a href="#none">删除</a><br />
-									<a href="#none">移到我的关注</a>
-								</li>
-							</ul>
-						</div>
-					</div>
+
+
+					</div>l
 				</div>
-				<div class="cart-item-list">
-					<div class="cart-shop">
-						<input type="checkbox" name="" id="" value="" />
-						<span class="shopname">神州数码专营店</span>
-					</div>
-					<div class="cart-body">
-						<div class="cart-list">
-							<ul class="goods-list yui3-g">
-								<li class="yui3-u-1-24">
-									<input type="checkbox" name="" id="" value="" />
-								</li>
-								<li class="yui3-u-11-24">
-									<div class="good-item">
-										<div class="item-img"><img src="/static/img/goods.png" /></div>
-										<div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存
-											尺寸：13.3英寸</div>
-									</div>
-								</li>
-								
-								<li class="yui3-u-1-8"><span class="price">8848.00</span></li>
-								<li class="yui3-u-1-8">
-									<a href="javascript:void(0)" class="increment mins">-</a>
-									<input autocomplete="off" type="text" value="1" minnum="1" class="itxt" />
-									<a href="javascript:void(0)" class="increment plus">+</a>
-								</li>
-								<li class="yui3-u-1-8"><span class="sum">8848.00</span></li>
-								<li class="yui3-u-1-8">
-									<a href="#none">删除</a><br />
-									<a href="#none">移到我的关注</a>
-								</li>
-							</ul>
-						</div>
-						<div class="cart-list">
-							<ul class="goods-list yui3-g">
-								<li class="yui3-u-1-24">
-									<input type="checkbox" name="" id="" value="" />
-								</li>
-								<li class="yui3-u-11-24">
-									<div class="good-item">
-										<div class="item-img"><img src="/static/img/goods.png" /></div>
-										<div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存
-											尺寸：13.3英寸</div>
-									</div>
-								</li>
-								
-								<li class="yui3-u-1-8"><span class="price">8848.00</span></li>
-								<li class="yui3-u-1-8">
-									<a href="javascript:void(0)" class="increment mins">-</a>
-									<input autocomplete="off" type="text" value="1" minnum="1" class="itxt" />
-									<a href="javascript:void(0)" class="increment plus">+</a>
-								</li>
-								<li class="yui3-u-1-8"><span class="sum">8848.00</span></li>
-								<li class="yui3-u-1-8">
-									<a href="#none">删除</a><br />
-									<a href="#none">移到我的关注</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="cart-tool">
-				<div class="select-all">
-					<input type="checkbox" name="" id="" value="" />
-					<span>全选</span>
-				</div>
+				@endforeach
 				<div class="option">
 					<a href="#none">删除选中的商品</a>
 					<a href="#none">移到我的关注</a>
@@ -201,11 +85,11 @@
 				<div class="toolbar">
 					<div class="chosed">已选择<span>0</span>件商品</div>
 					<div class="sumprice">
-						<span><em>总价（不含运费） ：</em><i class="summoney">¥16283.00</i></span>
+						<span><em>总价（不含运费） ：</em><i class="summoney">{{$sum}}</i></span>
 						<span><em>已节省：</em><i>-¥20.00</i></span>
 					</div>
 					<div class="sumbtn">
-						<a class="sum-btn" href="getOrderInfo.html" target="_blank">结算</a>
+						<a class="sum-btn" href="order" target="_blank">生成订单</a>
 					</div>
 				</div>
 			</div>

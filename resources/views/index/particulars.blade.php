@@ -1,13 +1,13 @@
+<script src="/js/jquery-3.2.1.min.js"></script>
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 	<title>产品详情页</title>
 	 <link rel="icon" href="/assets/img/favicon.ico">
-	
+
 
     <link rel="stylesheet" type="text/css" href="/static/css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/pages-zoom.css" />
@@ -101,26 +101,23 @@ $(function(){
 						</div>
 					</div>
 					<div class="product-collect">
-						<a href="javascript:;" id="star"><img src="/static/img/_/shi_heart.png" alt=""> 收藏</a>
+						<a href="javascript:;" id="stars"><img src="/static/img/_/shi_heart.png" alt=""> 收藏</a>
 					</div>
 				</div>
 				<div class="fr itemInfo-wrap">
 					<div class="sku-name">
-						<h4>Apple iPhone 6s（A1700）64G玫瑰金色 移动通信电信4G手机</h4>
+						<h4>{{$goods['goods_name']}}</h4>
 					</div>
-					<div class="news">
-						<span><img src="/static/img/_/clock.png"/>品优秒杀</span>
-						<span class="overtime">距离结束：01:56:78</span>
-						</div>
+
 					<div class="summary">
 						<div class="summary-wrap">
-							
+
 							<div class="fl title">
 								<i>价　　格</i>
 							</div>
 							<div class="fl price">
 								<i>¥</i>
-								<em>5299.00</em>
+								<em>{{$goods['shop_price']}}</em>
 								<span>降价通知</span>
 							</div>
 							<div class="fr remark">
@@ -229,7 +226,7 @@ $(function(){
 							<div class="fl">
 								<ul class="btn-choose unstyled">
 									<li>
-										<a href="cart.html" target="_blank" class="sui-btn  btn-danger addshopcar">加入购物车</a>
+										<button target="_blank" id="btn_add" class="sui-btn  btn-danger addshopcar">加入购物车</button>
 									</li>
 								</ul>
 							</div>
@@ -237,6 +234,7 @@ $(function(){
 					</div>
 				</div>
 			</div>
+
 			<!--product-detail-->
 			<div class="clearfix product-detail">
 				<div class="fl aside">
@@ -640,6 +638,31 @@ $(function(){
 	</div>
 </script>
 <!--侧栏面板结束-->
-undefined
 
 </html>
+<script>
+    //加入购物车
+	$("#btn_add").click(function(){
+		$.ajax({
+		url:"/index/cart?id="+{{$goods['goods_id']}},
+		type:"get",
+		dataType:"json",
+		success:function(d){
+			if(d.errno==0){
+				alert(d.msg)
+			}else{
+				if(d.errno=400001){
+					alert(d.msg);
+					window.location.href='/index/login'
+				}
+
+			}
+		}
+	})
+	})
+    $("#stars").click(function () {
+        var _this=$(this);
+
+    })
+
+</script>

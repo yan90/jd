@@ -2,12 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\Model\CateModel;
+
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-
+// use CategoryModel;
+use App\Model\CateModel;
 class CateController extends AdminController
 {
     /**
@@ -25,6 +26,7 @@ class CateController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new CateModel());
+        $grid->model()->orderBy('cat_id',"desc");//倒叙
 
         $grid->column('cat_id', __('Cat id'));
         $grid->column('cat_name', __('Cat name'));
@@ -80,20 +82,20 @@ class CateController extends AdminController
     protected function form()
     {
         $form = new Form(new CateModel());
-
-        $form->text('cat_name', __('Cat name'));
-        $form->text('keywords', __('Keywords'));
-        $form->text('cat_desc', __('Cat desc'));
-        $form->number('parent_id', __('Parent id'));
-        $form->switch('sort_order', __('Sort order'))->default(50);
-        $form->text('template_file', __('Template file'));
-        $form->text('measure_unit', __('Measure unit'));
-        $form->switch('show_in_nav', __('Show in nav'));
-        $form->text('style', __('Style'));
-        $form->switch('is_show', __('Is show'))->default(1);
-        $form->switch('grade', __('Grade'));
-        $form->text('filter_attr', __('Filter attr'));
-        $form->switch('float_percent', __('Float percent'));
+        $form->text('cat_name', __('分类名'));
+        // $form->text('keywords', __('Keywords'));
+        // $form->text('cat_desc', __('Cat desc'));
+        // $form->number('parent_id', __('父级分类'));
+        $form->select('parent_id', __('父级分类'))->options(CateModel::selectOptions());
+        $form->number('sort_order', __('排序'));
+        // $form->text('template_file', __('Template file'));
+        // $form->text('measure_unit', __('Measure unit'));
+        // $form->switch('show_in_nav', __('Show in nav'));
+        // $form->text('style', __('Style'));
+        // $form->switch('is_show', __('Is show'))->default(1);
+        // $form->switch('grade', __('Grade'));
+        // $form->text('filter_attr', __('Filter attr'));
+        // $form->switch('float_percent', __('Float percent'));
 
         return $form;
     }

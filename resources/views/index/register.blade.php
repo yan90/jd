@@ -22,7 +22,7 @@
 		<div class="registerArea">
 			<h3>注册新用户<span class="go">我有账号，去<a href="login" >登陆</a></span></h3>
 			<div class="info">{{session('msg')}}
-				<form class="sui-form form-horizontal"  action="{{url('/index/home')}}" method="post">
+				<form class="sui-form form-horizontal"  action="{{url('index/home')}}" method="post" >
 				@csrf
 					<div class="control-group">
 						<label class="control-label">用户名：</label>
@@ -30,7 +30,7 @@
 							<input type="text" placeholder="请输入你的用户名" name="user_name" class="input-xfat input-xlarge">
 						</div>
 					</div>
-					
+
 					<div class="control-group">
 						<label for="inputPassword" class="control-label">登录密码：</label>
 						<div class="controls">
@@ -61,7 +61,7 @@
 							<input type="text" placeholder="短信验证码" class="input-xfat input-xlarge">  <a href="#">获取短信验证码</a>
 						</div>
 					</div>
-					
+
 					<div class="control-group">
 						<label for="inputPassword" class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 						<div class="controls">
@@ -70,8 +70,7 @@
 					</div>
 					<div class="control-group">
 						<label class="control-label"></label>
-						<div class="controls btn-reg">
-							<input type="submit"value="完成注册" class="sui-btn btn-block btn-xlarge btn-danger">
+						<div class="controls btn-reg"><input type="submit"value="完成注册" class="sui-btn btn-block btn-xlarge btn-danger">
 						</div>
 					</div>
 				</form>

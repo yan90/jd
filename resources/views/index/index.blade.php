@@ -6,11 +6,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 	<title>品优购，优质！优质！</title>
 	 <link rel="icon" href="assets/img/favicon.ico">
+
     <link rel="stylesheet" type="text/css" href="/static/css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/pages-JD-index.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/widget-jquery.autocomplete.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/widget-cartPanelView.css" />
 </head>
+
+<body>
 <!-- 页面顶部 -->
 @include("cmmon.top.index_topy")
 <!-- 头部 -->
@@ -544,7 +547,7 @@
 					</div>
 				</li>
 				<li class="yui3-u-5-24">
-					<a href="list.html" target="_blank"><img src="img/today01.png" /></a>
+					<a href="list.html" target="_blank"><img src="/static/img/today01.png" /></a>
 				</li>
 				<li class="yui3-u-5-24">
 					<img src="/static/img/today02.png" />
@@ -615,7 +618,7 @@
 								</div>
 							</dd>
 							<dd>
-								<a href="" class="pic"><img nsrc="assets/img/like_02.png" alt="" /></a>
+								<a href="" class="pic"><img nsrc="/static/assets/img/like_02.png" alt="" /></a>
 								<div class="like-text">
 									<p>三星（G5500）</p>
 									<p>移动联通双网通</p>
@@ -673,7 +676,7 @@
 								</div>
 							</dd>
 							<dd>
-								<a href="http://sc.chinaz.com/" class="pic"><img nsrc="assets/img/like_02.png" alt="" /></a>
+								<a href="http://sc.chinaz.com/" class="pic"><img nsrc="/static/assets/img/like_02.png" alt="" /></a>
 								<div class="like-text">
 									<p>韩国所望紧致湿润精华露400ml</p>
 									<h3>¥896.00</h3>
@@ -966,18 +969,19 @@
 				<li class="Brand-item">
 					<img src="/static/img/brand_21.png" />
 				</li>
-				<li class="Brand-item"></static/img src="img/brand_03.png" /></li>
-				<li class="Brand-item"></static/img src="img/brand_05.png" /></li>
-				<li class="Brand-item"></static/img src="img/brand_07.png" /></li>
-				<li class="Brand-item"></static/img src="img/brand_09.png" /></li>
-				<li class="Brand-item"></static/img src="img/brand_11.png" /></li>
-				<li class="Brand-item"></static/img src="img/brand_13.png" /></li>
-				<li class="Brand-item"></static/img src="img/brand_15.png" /></li>
-				<li class="Brand-item"></static/img src="img/brand_17.png" /></li>
-				<li class="Brand-item"></static/img src="img/brand_19.png" /></li>
+				<li class="Brand-item"><img src="/static/img/brand_03.png" /></li>
+				<li class="Brand-item"><img src="/static/img/brand_05.png" /></li>
+				<li class="Brand-item"><img src="/static/img/brand_07.png" /></li>
+				<li class="Brand-item"><img src="/static/img/brand_09.png" /></li>
+				<li class="Brand-item"><img src="/static/img/brand_11.png" /></li>
+				<li class="Brand-item"><img src="/static/img/brand_13.png" /></li>
+				<li class="Brand-item"><img src="/static/img/brand_15.png" /></li>
+				<li class="Brand-item"><img src="/static/img/brand_17.png" /></li>
+				<li class="Brand-item"><img src="/static/img/brand_19.png" /></li>
 			</ul>
 		</div>
 	</div>
+	<!-- 底部栏位 -->
 	<!-- 底部栏位 -->
 	@include("cmmon.foot.index_foot")
 <!--页面底部END-->
@@ -1026,7 +1030,7 @@
 	</div>
 </script>
 <!--侧栏面板结束-->
-<script type="text/javascript" src="/static/js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#service").hover(function(){
