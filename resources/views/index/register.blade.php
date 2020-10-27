@@ -55,12 +55,6 @@
 							<input type="text" placeholder="请输入你的手机号" name="tel" class="input-xfat input-xlarge">
 						</div>
 					</div>
-					<div class="control-group">
-						<label for="inputPassword" class="control-label">短信验证码：</label>
-						<div class="controls">
-							<input type="text" placeholder="短信验证码" class="input-xfat input-xlarge">  <a href="#">获取短信验证码</a>
-						</div>
-					</div>
 
 					<div class="control-group">
 						<label for="inputPassword" class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>

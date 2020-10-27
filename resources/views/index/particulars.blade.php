@@ -14,13 +14,11 @@
     <link rel="stylesheet" type="text/css" href="/static/css/pages-seckill-item.css" />
     <link rel="stylesheet" type="text/css" href="/static/css/widget-cartPanelView.css" />
 </head>
-
 <body>
 <!-- 页面顶部 -->
 @include("cmmon.top.index_topy")
 <!-- 头部 -->
 @include("cmmon.top.index_top")
-
 <script type="text/javascript" src="/static/js/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -34,7 +32,6 @@ $(function(){
 	},function(){
 		$("#shopcarlist").hide();
 	});
-
 })
 </script>
 <script type="text/javascript" src="/static/js/widget/cartPanelView.js"></script>
@@ -77,7 +74,7 @@ $(function(){
 					<!--放大镜效果-->
 					<div class="zoom">
 						<!--默认第一个预览-->
-						<div id="preview" class="spec-preview">
+						<div id="preview" class="spec-preview">。】f'f
 							<span class="jqzoom"><img jqimg="img/_/b1.png" src="/static/img/_/s1.png" /></span>
 						</div>
 						<!--下方的缩略图-->
@@ -101,7 +98,12 @@ $(function(){
 						</div>
 					</div>
 					<div class="product-collect">
-						<a href="javascript:;" id="stars"><img src="/static/img/_/shi_heart.png" alt=""> 收藏</a>
+                            @if($collect==1)
+                            <a href="javascript:;" id="fav"> 取消收藏</a>
+                        @else
+                            <a href="javascript:;" id="fav"> 收藏</a>
+
+                        @endif
 					</div>
 				</div>
 				<div class="fr itemInfo-wrap">
@@ -212,7 +214,9 @@ $(function(){
 
 						</div>
 
+                        <static>
 
+                        </static>
 						<div class="summary-wrap">
 							<div class="fl title">
 								<div class="control-group">
@@ -226,8 +230,9 @@ $(function(){
 							<div class="fl">
 								<ul class="btn-choose unstyled">
 									<li>
+
 										<button target="_blank" id="btn_add" class="sui-btn  btn-danger addshopcar">加入购物车</button>
-									</li>
+                                    </li>
 								</ul>
 							</div>
 						</div>
@@ -610,16 +615,15 @@ $(function(){
 							</div>
 						</li>
 					</ul>
-				</div>
+				</div    >
 			</div>
 		</div>
 	</div>
 	<!-- 底部栏位 -->
 	@include("cmmon.foot.index_foot")
 <!--页面底部END-->
-    <!--侧栏面板开始-->
-	@include("cmmon.right.index_right")
-
+    <!--侧栏面板开始-->=
+      u
 <!--购物车单元格 模板-->
 <script type="text/template" id="tbar-cart-item-template">
 	<div class="tbar-cart-item" >
@@ -641,28 +645,51 @@ $(function(){
 
 </html>
 <script>
-    //加入购物车
-	$("#btn_add").click(function(){
-		$.ajax({
-		url:"/index/cart?id="+{{$goods['goods_id']}},
-		type:"get",
-		dataType:"json",
-		success:function(d){
-			if(d.errno==0){
-				alert(d.msg)
-			}else{
-				if(d.errno=400001){
-					alert(d.msg);
-					window.location.href='/index/login'
-				}
+    $(document).ready(function () {
+        //加入购物车
+        $("#btn_add").click(function(){
+            $.ajax({
+                url:"/index/cart?id="+{{$goods['goods_id']}},
+                type:"get",
+                dataType:"json",
+                success:function(d){
+                    if(d.errno==0){
+                        alert(d.msg)
+                    }else{
+                        if(d.errno=400001){
+                            alert(d.msg);
+                            window.location.href='/index/login'
+                        }
 
-			}
-		}
-	})
-	})
-    $("#stars").click(function () {
-        var _this=$(this);
-
+                    }
+                }
+            })
+        })
+            //收藏
+        $("#fav").click(function(){
+            var _this=$(this)
+            $.ajax({
+                url:"/index/fav?goods_id="+{{$goods['goods_id']}},
+                type: "get",
+                dataType: "json",
+                success:function (d) {
+                    if (d.erron==200){
+                        _this.text('取消收藏')
+                        alert(d.msg)
+                        return  false;
+                    }else {
+                        if(d.erron==400){
+                            alert(d.msg);
+                            window.location.href='/index/login';
+                            return false;
+                        }
+                        _this.text('收藏')
+                        alert(d.msg)
+                    }
+                }
+            })
+        })
     })
+
 
 </script>

@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\index;
 
 use App\Http\Controllers\Controller;
+use App\model\CollectModel;
 use App\Model\GoodsModel;
 use Illuminate\Http\Request;
 use App\Model\CartModel;
 use Illuminate\Support\Facades\Redis;
 use GuzzleHttp \Client;
-
 class IndexController extends Controller
 {
     //首页
     public function index(){
-        return view('index/index');
+        //收藏列表
+        $collectInfo=CollectModel::get();
+        return view('index/index',['collectInfo'=>$collectInfo]);
     }
     //秒杀
     public function seckill(){
@@ -94,18 +96,19 @@ class IndexController extends Controller
     }
     //商品详情
     public function particulars (Request $request){
+        $user_id=session('user_id');
         $goods_id=$request->get('id');
-        // $key='h:goods_info:'.$goods_id;
-
+         $key='h:goods_info:'.$goods_id;
         //查询缓存
-        // $g=Redis::HGetALL($key);
-        // if($g){//有缓存
-        //      echo '有缓存,不用查询数据库';
-
-        // }else{
-        //     echo '无缓存,正在查询数据库';
+         $g=Redis::HGetALL($key);
+         if($g){//有缓存
+              echo '有缓存,不用查询数据库';
+         }else {
+             echo '无缓存,正在查询数据库';
+         }
         //      //获取商品信息
         $goods_info=GoodsModel::find($goods_id);
+
         //验证商品是否有效（是否存在  是否下架  是否删除）
         if(empty($goods_info)){
             echo '商品不存在';
@@ -117,16 +120,27 @@ class IndexController extends Controller
         }
 
         $g=$goods_info->toArray();
-        // //存入缓存
-        // Redis::hmset($key,$g);
+         //存入缓存
+         Redis::hmset($key,$g);
         // echo '数据存在redis中';exit;
         // }
         // echo '<pre>';print_r($g);echo '</pre>';
         $data=[
             'goods'=>$g
         ];
-        //  dd($data);
-        return view('index/particulars',$data);
+//          print_r($data);exit;
+        //查询用户是否收藏改课程
+        $where=[
+          ['user_id','=',$user_id]  ,
+            ['goods_id','=',$goods_id],
+        ];
+        $collect=CollectModel::where($where)->first();
+        if(!empty($collect)){
+            $collect=1;
+        }else{
+            $collect=2;
+        }
+        return view('index/particulars',$data,['collect'=>$collect]);
     }
     //查询天气
     public function weather(){
@@ -190,4 +204,40 @@ class IndexController extends Controller
                 return redirect('/index/index_cart');
             }
         }
+    //收藏
+    public  function  fav(Request $request){
+        $goods_id = $request->goods_id;
+        $user_id = session('user_id');
+        if(empty($user_id)){
+            $data = [//没有登录
+                'erron' =>400,
+                'msg' =>'请先登录',
+            ];
+        }
+        // 收藏表
+        $where = [
+            'user_id'  =>$user_id,。
+        ];
+        $data = [
+            'goods_id'  =>$goods_id,
+            'user_id'   =>$user_id,
+            'collect_time'  =>time(),
+        ];
+        $res = CollectModel::where($where)->first();
+        if(empty($res)){
+            CollectModel::insert($data);
+            $data = [
+                'erron' =>200,
+                'msg'   =>'收藏成功',
+            ];
+            return json_encode($data,true);
+        }else {
+            CollectModel::where($where)->delete();
+            $data = [
+                'erron' => 201,
+                'msg' => '取消收藏成功',
+            ];
+            return json_encode($data, true);
+        }
     }
+}

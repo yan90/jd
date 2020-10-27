@@ -23,6 +23,7 @@ class LoginController extends Controller
         // dd($data);
         $user_name=$request->input('user_name');
         $email=$request->input('email');
+
         $password=$request->input('password');
         $passwords=$request->input('passwords');
         //判断用户名不能为空

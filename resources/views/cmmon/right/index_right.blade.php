@@ -34,19 +34,23 @@
 					</div>
 				</div>
 
-				<!-- 我的关注 -->
+				<!-- 我的收藏 -->
 				<div style="visibility: hidden;" data-name="follow" class="J-content toolbar-panel tbar-panel-follow">
 					<h3 class="tbar-panel-header J-panel-header">
-						<a href="#" target="_blank" class="title"> <i></i> <em class="title">我的关注</em> </a>
+						<a href="#" target="_blank" class="title"> <i></i> <em class="title">我的收藏</em> </a>
 						<span class="close-panel J-close" onclick="cartPanelView.tbar_panel_close('follow');"></span>
 					</h3>
+                    @foreach($collectInfo as $v)
 					<div class="tbar-panel-main">
 						<div class="tbar-panel-content J-panel-content">
 							<div class="tbar-tipbox2">
-								<div class="tip-inner"> <i class="i-loading"></i> </div>
-							</div>
+								<div class="tip-inner"> <i class="i-loading">商品id：{{$v->goods_id}}</i> </div>
+                                <div class="tip-inner"> <i class="i-loading">时间{{date('Y-m-d H:i:s',$v->collect_time)}}</i> </div>
+
+                            </div>
 						</div>
 					</div>
+                    @endforeach
 					<div class="tbar-panel-footer J-panel-footer"></div>
 				</div>
 

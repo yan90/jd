@@ -23,6 +23,7 @@ Route::get('/index/logout','index\LoginController@logout');                //退
 Route::get('/index/index','index\IndexController@index');                 //前台首页
 Route::get('/index/seckill','index\IndexController@seckill');        //秒杀
 Route::get('/index/cart','index\IndexController@cart');                    //加入购物车
+Route::get('/index/fav','index\IndexController@fav');                    //收藏
 Route::get('/index/index_cart','index\IndexController@index_cart');        //购物车视图
 Route::get('/index/particulars','index\IndexController@particulars');        //商品详情
 Route::get('/index/order','index\OrderController@order');                  //订单页面
@@ -40,6 +41,10 @@ Route::get('/index/enroll','index\LoginController@enroll');           //注册�
 Route::get('alipay','index\AlipayController@Alipay');  // 发起支付请求
 Route::any('notify','index\AlipayController@AliPayReturn'); //服务器异步通知页面路径
 Route::any('return','index\AlipayController@AliPayNotify');  //页面跳转同步通知页面路径
+Route::any('prize','index\PrizeController@index');  //抽奖
+Route::any('prize/add','index\PrizeController@add');  //开始抽奖
+
+
 
 
 
