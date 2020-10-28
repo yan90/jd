@@ -13,9 +13,12 @@ class IndexController extends Controller
 {
     //首页
     public function index(){
-        //收藏列表
+        //右侧收藏列表
         $collectInfo=CollectModel::get();
-        return view('index/index',['collectInfo'=>$collectInfo]);
+        //猜你喜欢
+        $goodsInfo=GoodsModel::limit(6)->get()->toArray();
+
+        return view('index/index',['collectInfo'=>$collectInfo,'goodsInfo'=>$goodsInfo]);
     }
     //秒杀
     public function seckill(){
@@ -140,6 +143,8 @@ class IndexController extends Controller
         }else{
             $collect=2;
         }
+        //记录浏览排行+1
+        GoodsModel::where(['goods_id'=>$goods_id])->increment('click_count');
         return view('index/particulars',$data,['collect'=>$collect]);
     }
     //查询天气
@@ -206,7 +211,7 @@ class IndexController extends Controller
         }
     //收藏
     public  function  fav(Request $request){
-        $goods_id = $request->goods_id;
+        $id = $request->id;
         $user_id = session('user_id');
         if(empty($user_id)){
             $data = [//没有登录
@@ -216,13 +221,15 @@ class IndexController extends Controller
         }
         // 收藏表
         $where = [
-            'user_id'  =>$user_id,。
+            'user_id'  =>$user_id,
         ];
         $data = [
-            'goods_id'  =>$goods_id,
+            'goods_id'  =>$id,
             'user_id'   =>$user_id,
             'collect_time'  =>time(),
         ];
+        //收藏+1
+        GoodsModel::where(['goods_id'=>$id])->increment('fav_count');
         $res = CollectModel::where($where)->first();
         if(empty($res)){
             CollectModel::insert($data);
@@ -230,6 +237,7 @@ class IndexController extends Controller
                 'erron' =>200,
                 'msg'   =>'收藏成功',
             ];
+
             return json_encode($data,true);
         }else {
             CollectModel::where($where)->delete();
@@ -237,7 +245,9 @@ class IndexController extends Controller
                 'erron' => 201,
                 'msg' => '取消收藏成功',
             ];
+
             return json_encode($data, true);
         }
+
     }
 }

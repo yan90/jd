@@ -575,26 +575,27 @@
 			</div>
 			<div class="bd">
 				<ul class="clearfix yui3-g Favourate picLB" id="picLBxxl">
+                    @foreach($goodsInfo as $v)
 
 					<li class="yui3-u-1-6">
 						<dl class="picDl huozhe">
 							<dd>
-								<a href="" class="pic"><img src="/static/img/like_02.png" alt="" /></a>
+								<a href="/index/particulars?" class="pic"><img src="/upload/{{$v['goods_img']}}" alt="" /></a>
 								<div class="like-text">
-									<p>阳光美包新款单肩包女包时尚子母包四件套女</p>
-									<h3>¥116.00</h3>
+									<p>{{$v['goods_name']}}</p>
+									<h3>{{$v['shop_price']}}</h3>
 								</div>
 							</dd>
 							<dd>
-								<a href="" class="pic"><img src="/static/img/like_01.png" alt="" /></a>
+								<a href="/index/particulars" class="pic"><img src="/upload/{{$v['goods_img']}}" alt="" /></a>
 								<div class="like-text">
-									<p>爱仕达 30CM炒锅不粘锅NWG8330E电磁炉炒</p>
-									<h3>¥116.00</h3>
+									<p>{{$v['goods_name']}}</p>
+									<h3>{{$v['shop_price']}}</h3>
 								</div>
 							</dd>
 						</dl>
 					</li>
-
+                    @endforeach
 				</ul>
 			</div>
 		</div>

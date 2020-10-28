@@ -43,6 +43,8 @@ Route::any('notify','index\AlipayController@AliPayReturn'); //服务器异步通
 Route::any('return','index\AlipayController@AliPayNotify');  //页面跳转同步通知页面路径
 Route::any('prize','index\PrizeController@index');  //抽奖
 Route::any('prize/add','index\PrizeController@add');  //开始抽奖
+Route::get('movie','MovieController@index');  //电影
+
 
 
 

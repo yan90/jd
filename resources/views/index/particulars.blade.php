@@ -669,7 +669,7 @@ $(function(){
         $("#fav").click(function(){
             var _this=$(this)
             $.ajax({
-                url:"/index/fav?goods_id="+{{$goods['goods_id']}},
+                url:"/index/fav?id="+{{$goods['goods_id']}},
                 type: "get",
                 dataType: "json",
                 success:function (d) {
