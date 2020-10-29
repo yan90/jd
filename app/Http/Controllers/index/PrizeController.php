@@ -4,7 +4,7 @@ namespace App\Http\Controllers\index;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\model\PrizeModel;
+use App\Model\PrizeModel;
 class PrizeController extends Controller
 {
     //抽奖

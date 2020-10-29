@@ -8,7 +8,7 @@ use App\Model\UserModel;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 use GuzzleHttp \Client;
-use App\model\GitModel;
+use App\Model\GitModel;
 use Mail;
 class LoginController extends Controller
 {

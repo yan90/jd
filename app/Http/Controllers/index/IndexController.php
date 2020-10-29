@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\index;
 
 use App\Http\Controllers\Controller;
-use App\model\CollectModel;
+use App\Model\CollectModel;
 use App\Model\GoodsModel;
 use Illuminate\Http\Request;
 use App\Model\CartModel;
 use Illuminate\Support\Facades\Redis;
 use GuzzleHttp \Client;
-use App\model\HistoryModel;
+use App\Model\HistoryModel;
 class IndexController extends Controller
 {
     //首页
