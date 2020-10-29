@@ -133,7 +133,7 @@ class LoginController extends Controller
             $logininfo = ['last_login'=>$last_login,'last_ip'=>$ip,'visit_count'=>$res['visit_count']+1];
             $Womodel->where('user_id',$res['user_id'])->update($logininfo);
 
-            return redirect('/index/index');
+            return redirect('/');
         }else{
             return redirect('/index/login')->with(['msg'=>'账号或者密码错误']);
         }

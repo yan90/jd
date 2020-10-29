@@ -513,6 +513,10 @@
                             <i class="list-item list-item-12"></i>
                            <a href="/prize"> <span class="service-intro">抽奖</span></a>
                         </li>
+                        <li class="yui3-u-1-4 life-item notab-item">
+                            <i class="list-item list-item-12"></i>
+                            <a href="/film?film_id=1"> <span class="service-intro">电影</span></a>
+                        </li>
 					</ul>
 					<div class="life-item-content">
 						<div class="life-detail">
@@ -580,7 +584,7 @@
 					<li class="yui3-u-1-6">
 						<dl class="picDl huozhe">
 							<dd>
-								<a href="/index/particulars?" class="pic"><img src="/upload/{{$v['goods_img']}}" alt="" /></a>
+								<a href="/index/particulars?id={{$v['goods_id']}}" class="pic"><img src="/upload/{{$v['goods_img']}}" alt="" /></a>
 								<div class="like-text">
 									<p>{{$v['goods_name']}}</p>
 									<h3>{{$v['shop_price']}}</h3>

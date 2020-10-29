@@ -9,7 +9,7 @@
 			<div class="py-container">
 				<div class="yui3-g Logo">
 					<div class="yui3-u Left logoArea">
-						<a class="logo-bd" title="品优购" href="index" ></a>
+						<a class="logo-bd" title="品优购" href="/" ></a>
 					</div>
 					<div class="yui3-u Center searchArea">
 						<div class="search">
@@ -38,7 +38,7 @@
 						<div class="fr shopcar">
 							<div class="show-shopcar" id="shopcar">
 								<span class="car"></span>
-								<a class="sui-btn btn-default btn-xlarge" href="index_cart" target="_blank">
+								<a class="sui-btn btn-default btn-xlarge" href="/index/index_cart" target="_blank">
 									<span>我的购物车</span>
 									<i class="shopnum">0</i>
 								</a>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Model\CartModel;
 use Illuminate\Support\Facades\Redis;
 use GuzzleHttp \Client;
+use App\model\HistoryModel;
 class IndexController extends Controller
 {
     //首页
@@ -111,7 +112,6 @@ class IndexController extends Controller
          }
         //      //获取商品信息
         $goods_info=GoodsModel::find($goods_id);
-
         //验证商品是否有效（是否存在  是否下架  是否删除）
         if(empty($goods_info)){
             echo '商品不存在';
@@ -145,6 +145,15 @@ class IndexController extends Controller
         }
         //记录浏览排行+1
         GoodsModel::where(['goods_id'=>$goods_id])->increment('click_count');
+        //用户历史浏览记录
+        if(!empty($user_id)){
+            $data2=[
+                'user_id'=>$user_id,
+                'goods_id'=>$goods_id,
+                'htstory_time'=>time(),
+            ];
+            $res=HistoryModel::insert($data2);
+        }
         return view('index/particulars',$data,['collect'=>$collect]);
     }
     //查询天气
