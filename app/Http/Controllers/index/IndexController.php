@@ -82,7 +82,7 @@ class IndexController extends Controller
     public function index_cart(){
         $user_id=session()->get('user_id');
         if(empty($user_id)){
-            return redirect('index/login');
+            return redirect('/login');
         }
             // 取购物车的商品信息
             $list=CartModel::where(['user_id'=>$user_id])->get();
@@ -227,6 +227,7 @@ class IndexController extends Controller
                 'erron' =>400,
                 'msg' =>'请先登录',
             ];
+            return $data;
         }
         // 收藏表
         $where = [

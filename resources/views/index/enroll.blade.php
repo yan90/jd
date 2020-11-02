@@ -20,9 +20,9 @@
     </div>
     <!--register-->
     <div class="registerArea">
-        <h3>注册新用户<span class="go">我有账号，去<a href="login" >登陆</a></span></h3>
+        <h3>注册新用户<span class="go">我有账号，去<a href="{{url('login')}}" >登陆</a></span></h3>
         <div class="info">{{session('msg')}}
-            <form class="sui-form form-horizontal"  action="{{url('/index/login')}}" method="get">
+            <form class="sui-form form-horizontal"  action="{{url('login')}}" method="get">
                 @csrf
                 <h1>邮箱已经注册成功请进入邮箱激活<h1>
 

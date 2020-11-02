@@ -14,12 +14,12 @@
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-Route::get('/index/register','index\LoginController@register'); //        //前台注册视图
+Route::get('/register','index\LoginController@register'); //        //前台注册视图
 Route::post('/index/home','index\LoginController@home');              //注册执行
 Route::get('/user/active','index\LoginController@active');             //激活用户
-Route::get('/index/login','index\LoginController@login');             //前台登录视图
+Route::get('login','index\LoginController@login');             //前台登录视图
 Route::post('/index/logindo','index\LoginController@logindo');           //登录执行
-Route::get('/index/logout','index\LoginController@logout');                //退出
+Route::get('/logout','index\LoginController@logout');                //退出
 Route::get('/','index\IndexController@index');                 //前台首页
 Route::get('/index/seckill','index\IndexController@seckill');        //秒杀
 Route::get('/index/cart','index\IndexController@cart');                    //加入购物车
@@ -46,6 +46,9 @@ Route::any('prize/add','index\PrizeController@add');  //开始抽奖
 Route::get('film','MovieController@film');  //电影
 
 Route::post('film/add','MovieController@filmadd');// 电影购票
+
+Route::get('pim','index\PimController@pim');// 个人中心
+Route::get('user/pim','index\PimController@pimm');// 个人中心
 
 
 

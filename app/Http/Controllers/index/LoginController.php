@@ -107,14 +107,14 @@ class LoginController extends Controller
     }
     //登录视图
     public function login(){
-        return view('index/login');
+        return view('/index/login');
     }
     //执行登录
     public function logindo(Request $request){
         $user_name=$request->input('user_name');
         $user_password=$request->input('password');
         if(empty($user_name)){
-            return redirect('index/login')->with(['msg'=>'用户不能为空']);
+            return redirect('login')->with(['msg'=>'用户不能为空']);
         }
         //最后登录的ip
         $ip=$_SERVER['REMOTE_ADDR'];
@@ -124,7 +124,7 @@ class LoginController extends Controller
         ->first();
 //        dd($res);
       if(empty($res)){
-        return redirect('/index/login')->with(['msg'=>'用户不存在']);
+        return redirect('login')->with(['msg'=>'用户不存在']);
       }
         if($res['password']==md5($user_password)){
             session(['user_id'=>$res['user_id'],'user_name'=>$res['user_name'],'tel'=>$res['tel'],'email'=>$res['email']]);
@@ -133,9 +133,9 @@ class LoginController extends Controller
             $logininfo = ['last_login'=>$last_login,'last_ip'=>$ip,'visit_count'=>$res['visit_count']+1];
             $Womodel->where('user_id',$res['user_id'])->update($logininfo);
 
-            return redirect('/');
+            return redirect('/pim');
         }else{
-            return redirect('/index/login')->with(['msg'=>'账号或者密码错误']);
+            return redirect('/login')->with(['msg'=>'账号或者密码错误']);
         }
     }
     //  GITHUB登录
@@ -227,7 +227,7 @@ class LoginController extends Controller
         session(['user_id'=>null,'user_name'=>null,'tel'=>null]);
         $user_id=$request->session()->get('uid');
         if(empty($user_id)){
-            return redirect('index/index');
+            return redirect('/');
         }
     }
 }

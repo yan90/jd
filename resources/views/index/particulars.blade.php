@@ -658,7 +658,7 @@ $(function(){
                     }else{
                         if(d.errno=400001){
                             alert(d.msg);
-                            window.location.href='/index/login'
+                            window.location.href='/login'
                         }
 
                     }
@@ -680,7 +680,7 @@ $(function(){
                     }else {
                         if(d.erron==400){
                             alert(d.msg);
-                            window.location.href='/index/login';
+                            window.location.href='/login';
                             return false;
                         }
                         _this.text('收藏')
