@@ -15,6 +15,7 @@ class TextController extends Controller
     public function checkSignature(Request $request)
     {
         $echostr=$request->echostr;
+        echo $echostr;exit;
         $signature = $_GET["signature"];
         $timestamp = $_GET["timestamp"];
         $nonce = $_GET["nonce"];
@@ -31,7 +32,6 @@ class TextController extends Controller
             //调用自定义菜单
 //            $this->custom();
             echo "";
-            echo $echostr;
         }else{
             echo '';
         }
