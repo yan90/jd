@@ -17,12 +17,12 @@
 Route::get('/register','index\LoginController@register'); //        //前台注册视图
 Route::post('/index/home','index\LoginController@home');              //注册执行
 Route::get('/user/active','index\LoginController@active');             //激活用户
-Route::get('login','index\LoginController@login');             //前台登录视图
+Route::get('/login','index\LoginController@login');             //前台登录视图
 Route::post('/index/logindo','index\LoginController@logindo');           //登录执行
 Route::get('/logout','index\LoginController@logout');                //退出
 Route::get('/','index\IndexController@index');                 //前台首页
 Route::get('/index/seckill','index\IndexController@seckill');        //秒杀
-Route::get('/index/cart','index\IndexController@cart');                    //加入购物车
+Route::get('/index/cart','index\IndexController@cart')->middleware('check.login');                    //加入购物车
 Route::get('/index/fav','index\IndexController@fav');                    //收藏
 Route::get('/index/index_cart','index\IndexController@index_cart');        //购物车视图
 Route::get('/index/particulars','index\IndexController@particulars');        //商品详情
@@ -49,6 +49,14 @@ Route::post('film/add','MovieController@filmadd');// 电影购票
 
 Route::get('pim','index\PimController@pim');// 个人中心
 Route::get('user/pim','index\PimController@pimm');// 个人中心
+
+Route::get('/coupon','index\CouponController@index');// 领劵页面
+Route::get('/coupon/get','index\CouponController@getcoupon')->middleware('check.login');// 领劵
+Route::post('/coupon/test','index\CouponController@test');// 领劵页面
+
+
+
+
 
 
 

@@ -656,9 +656,14 @@ $(function(){
                     if(d.errno==0){
                         alert(d.msg)
                     }else{
-                        if(d.errno=400001){
+                        if(d.errno==400001){
                             alert(d.msg);
                             window.location.href='/login'
+                        }else{
+                            if(d.errno==8000){
+                                alert(d.msg);
+
+                            }
                         }
 
                     }

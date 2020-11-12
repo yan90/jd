@@ -9,7 +9,7 @@
 							@if(session("user_name")=='')
 							<a href="/login" >请登录</a>　<span><a href="/register" >免费注册</a></span></li>
 							@else
-							欢迎{{session("user_name")}}登录  &nbsp &nbsp  <a href="logout" >退出</a>&nbsp&nbsp&nbsp
+							欢迎{{session("user_name")}}登录  &nbsp &nbsp  <a href="/logout" >退出</a>&nbsp&nbsp&nbsp
                             <span><a href="{{url('pim')}}">个人中心</a></span>
 						@endif
 					</ul>

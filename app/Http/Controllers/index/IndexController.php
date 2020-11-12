@@ -32,14 +32,7 @@ class IndexController extends Controller
         $goodsinfo=$goods->first();
         //  print_r($goodsinfo);exit;
         $user_id=session()->get('user_id');
-        if(empty($user_id)){
-            $data=[
-                'errno'=>50001,
-                'msg'=>'请先登录',
-            ];
-            echo json_encode($data);
-            die;
-        }
+
         $goods_id=$request->get('id');
         $goods_num=$request->get('goods_num',1);
         $goods_name=$goodsinfo['goods_name'];
@@ -61,13 +54,20 @@ class IndexController extends Controller
         //  dd($cart_info);
         $res=CartModel::insertGetId($cart_info);
         // dd($res);
+        if($res>=20){
+            $data=[
+                'errno'=>8000,
+                'msg'=>'购物车已经超慢20个请清理购物车然后在添加',
+            ];
+            return $data;
+        }
         if($res>0){
             $data=[
                 'errno'=>0,
                 'msg'=>'成功加入购物车',
             ];
             echo json_encode($data);
-        }else{
+        }else {
             $data=[
                 'errno'=>50001,
                 'msg'=>'加入购物车失败',
@@ -86,17 +86,22 @@ class IndexController extends Controller
         }
             // 取购物车的商品信息
             $list=CartModel::where(['user_id'=>$user_id])->get();
-            // foreach($list as $k=>$v){
-            //     $goods[]=GoodsModel::find($v['goods_id'])->toArray();
-            // }
-            // $data=[
-            //     'goods'=>$goods
-            // ];
-            // dd($list);
+//            $list=$list->toArray();
+//            dd($list);
+        //商品表
+//           $good=GoodsModel::whereIn('goods_id',$list)->get();
+
+//        dd($list);
+            //商品表
+//        $list=$list->toArray();
+//        $good=GoodsModel::where('goods_id',$list)->get($list);
+//        print_r($good);exit;
+
             //总价格
         $sum=CartModel::sum('goods_price');
-        return view('index/cart',['list'=>$list,'sum'=>$sum]);
-
+        //:推荐商品和购物车中的商品属于同一分类,取分类下的最新商品
+        $his=HistoryModel::limit(10)->get();
+        return view('index/cart',['list'=>$list,'sum'=>$sum,'his'=>$his,]);
     }
     //商品详情
     public function particulars (Request $request){
