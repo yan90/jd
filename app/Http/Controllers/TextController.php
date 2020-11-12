@@ -31,6 +31,7 @@ class TextController extends Controller
             //调用自定义菜单
 //            $this->custom();
             echo "";
+            echo $echostr;
         }else{
             echo '';
         }

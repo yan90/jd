@@ -54,7 +54,7 @@ Route::get('/coupon','index\CouponController@index');// 领劵页面
 Route::get('/coupon/get','index\CouponController@getcoupon')->middleware('check.login');// 领劵
 Route::post('/coupon/test','index\CouponController@test');// 领劵页面
 //微信
-Route::post('/wx','TextController@checkSignature');  //接口微信
+Route::get('/wx','TextController@checkSignature');  //接口微信
 Route::get('/wx/token','TextController@token');  //access_token
 //Route::get('/tell','TextController@tell');  //postman测试
 //Route::post('/tell2','TextController@tell2');  //postman测试
