@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Log;
-use App\models\WeachModel;
+use App\model\WeachModel;
 use GuzzleHttp\Client;
 class TextController extends Controller
 {
