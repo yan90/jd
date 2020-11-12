@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\models\MediaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Log;
-use App\model\WeachModel;
 use GuzzleHttp\Client;
+use App\Model\WeachModel;
+use App\Model\MediaModel;
 class TextController extends Controller
 {
 
