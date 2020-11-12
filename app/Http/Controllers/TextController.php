@@ -15,7 +15,7 @@ class TextController extends Controller
     public function checkSignature(Request $request)
     {
         $echostr=$request->echostr;
-        echo $echostr;exit;
+//        echo $echostr;exit;
         $signature = $_GET["signature"];
         $timestamp = $_GET["timestamp"];
         $nonce = $_GET["nonce"];
