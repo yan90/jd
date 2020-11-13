@@ -254,6 +254,7 @@ class TextController extends Controller
         $url='https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$access_token;
 //        echo $url;
         $array=[
+            name=>'商城',
             'button'=>[
                 [
               'type'=>'view',
