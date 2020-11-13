@@ -255,19 +255,20 @@ class TextController extends Controller
 //        echo $url;
         //
         $array=[
+
             'name'=>'商城',
             'button'=>[
                 [
               'type'=>'view',
               'name'=>'商城',
               'url'=>'http://2004yjl.comcto.com/'.'/web_auth',
-                    [
-                        'type'=>'click',
-                        'name'=>'每日推荐',
-                        'key'=>'daily',
-                    ],
-            ],
 
+            ],
+                [
+                    'type'=>'click',
+                    'name'=>'每日推荐',
+                    'key'=>'daily',
+                ]
             [
                 'name'=>'菜单',
                 "sub_button"=>[
@@ -288,6 +289,7 @@ class TextController extends Controller
                     ]
                 ]
             ]
+
                 ]
         ];
 //        $array->toArray();
