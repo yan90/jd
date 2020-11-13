@@ -253,6 +253,7 @@ class TextController extends Controller
         $access_token=$this->token();
         $url='https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$access_token;
 //        echo $url;
+        //
         $array=[
             'name'=>'商城',
             'button'=>[
@@ -260,12 +261,13 @@ class TextController extends Controller
               'type'=>'view',
               'name'=>'商城',
               'url'=>'http://2004yjl.comcto.com/'.'/web_auth',
+                    [
+                        'type'=>'click',
+                        'name'=>'每日推荐',
+                        'key'=>'daily',
+                    ],
             ],
-                [
-                    'type'=>'click',
-                    'name'=>'每日推荐',
-                    'key'=>'daily',
-                ],
+
             [
                 'name'=>'菜单',
                 "sub_button"=>[
