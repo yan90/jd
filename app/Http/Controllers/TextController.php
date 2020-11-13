@@ -248,7 +248,7 @@ class TextController extends Controller
         return $data;
 
     }
-    //自定义菜单
+    //自定义菜单lpoloplop
     public function custom(){
         $access_token=$this->token();
         $url='https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$access_token;
