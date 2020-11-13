@@ -11,7 +11,7 @@ use App\Model\WeachModel;
 use App\Model\MediaModel;
 class TextController extends Controller
 {
-
+        //接入微信
     public function checkSignature(Request $request)
     {
         $echostr=$request->echostr;
@@ -29,7 +29,6 @@ class TextController extends Controller
         if( $tmpStr == $signature ){
             //调用关注回复
             $this->sub();
-
             echo "";
         }else{
             echo '';
@@ -261,6 +260,11 @@ class TextController extends Controller
               'name'=>'商城',
               'url'=>'http://2004yjl.comcto.com/'.'/web_auth',
             ],
+                [
+                    'type'=>'click',
+                    'name'=>'每日推荐',
+                    'key'=>'daily',
+                ],
             [
                 'name'=>'菜单',
                 "sub_button"=>[
