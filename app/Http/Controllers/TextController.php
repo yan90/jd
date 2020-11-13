@@ -29,7 +29,7 @@ class TextController extends Controller
         if( $tmpStr == $signature ){
             //调用关注回复
             $this->sub();
-            //调用自定义菜单
+
             echo "";
         }else{
             echo '';
@@ -73,6 +73,7 @@ class TextController extends Controller
                     $weachInfo = WeachModel::insert($data);
                 }
 //                Log::info('111=============='.$postArray);
+                //调用自定义菜单
                 echo  $this->custom();
                 $this->text($postArray, $content);
             }
@@ -338,7 +339,7 @@ class TextController extends Controller
         $redirect='http://2004yjl.comcto.com/'.'/web_redirect';
         $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=".env('WX_APPID')."&redirect_uri=".$redirect."&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 //        dd($url);
-        return $redirect($url);
+        return redirect($url);
     }
     //微信授权页面重定向
     public function wxWebRedirect(){
