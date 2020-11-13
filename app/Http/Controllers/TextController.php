@@ -358,6 +358,7 @@ class TextController extends Controller
         $api="https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
         $user=file_get_contents($api);
         $user_info=json_decode($user,true);
+//        dd($user_info);
         if($user_info){
             return redirect('/');
         }
