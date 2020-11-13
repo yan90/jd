@@ -98,7 +98,12 @@ class TextController extends Controller
                    return $result;
                     }
             }
-
+            //每日推荐
+//            if($postArray->Event=='CLICK'){
+//                if($postArray->EventKey=='daily'){
+//
+//                }
+//            }
 
         }elseif ($postArray->MsgType=="text"){
             $msg=$postArray->Content;
@@ -264,11 +269,7 @@ class TextController extends Controller
               'url'=>'http://2004yjl.comcto.com/'.'/web_auth',
 
             ],
-                [
-                    'type'=>'click',
-                    'name'=>'每日推荐',
-                    'key'=>'daily',
-                ],
+
             [
                 'name'=>'菜单',
                 "sub_button"=>[
@@ -286,7 +287,13 @@ class TextController extends Controller
                         'type'  => 'click',
                         'name'  => '签到',
                         'key'   => 'checkin'
-                    ]
+                    ],
+                    [
+                    'type'=>'click',
+                    'name'=>'每日推荐',
+                    'key'=>'daily',
+                ],
+                    
                 ]
             ]
 
