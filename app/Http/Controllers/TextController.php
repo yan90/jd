@@ -30,7 +30,6 @@ class TextController extends Controller
             //调用关注回复
             $this->sub();
             //调用自定义菜单
-            $this->custom();
             echo "";
         }else{
             echo '';
@@ -74,6 +73,7 @@ class TextController extends Controller
                     $weachInfo = WeachModel::insert($data);
                 }
 //                Log::info('111=============='.$postArray);
+                echo  $this->custom();
                 $this->text($postArray, $content);
             }
             //点击二级 获取天气
