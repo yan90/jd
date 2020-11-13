@@ -338,7 +338,7 @@ class TextController extends Controller
         $redirect='http://2004yjl.comcto.com/'.'/web_redirect';
         $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid=".env('WX_APPID')."&redirect_uri=".$redirect."&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 //        dd($url);
-        return $redirect;
+        return $redirect($url);
     }
     //微信授权页面重定向
     public function wxWebRedirect(){
@@ -358,7 +358,7 @@ class TextController extends Controller
         $api="https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
         $user=file_get_contents($api);
         $user_info=json_decode($user,true);
-//        dd($user_info);
+        dd($user_info);
         if($user_info){
             return redirect('/');
         }
