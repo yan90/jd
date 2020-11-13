@@ -30,7 +30,7 @@ class TextController extends Controller
             //调用关注回复
             $this->sub();
             //调用自定义菜单
-//            $this->custom();
+            $this->custom();
             echo "";
         }else{
             echo '';
