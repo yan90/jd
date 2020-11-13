@@ -256,9 +256,9 @@ class TextController extends Controller
         $array=[
             'button'=>[
                 [
-              'type'=>'click',
+              'type'=>'view',
               'name'=>'商城',
-              'key'=>'http://2004yjl.comcto.com/'.'/web_auth',
+              'url'=>'http://2004yjl.comcto.com/'.'/web_auth',
             ],
             [
                 'name'=>'菜单',
