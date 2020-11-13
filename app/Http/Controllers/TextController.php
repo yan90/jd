@@ -257,7 +257,7 @@ class TextController extends Controller
             'button'=>[
                 [
               'type'=>'click',
-              'name'=>"商城",
+              'name'=>'商城',
               'key'=>'http://2004yjl.comcto.com/'.'/web_auth',
             ],
             [
