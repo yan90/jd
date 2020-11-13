@@ -59,6 +59,10 @@ Route::get('/wx/token','TextController@token');  //access_token
 //Route::get('/tell','TextController@tell');  //postman测试
 //Route::post('/tell2','TextController@tell2');  //postman测试
 Route::get('/custom','TextController@custom');  //自定义菜单
+//微信授权页面
+Route::get('/web_auth','TextController@wxWebAuth');
+//微信重定向跳转地址
+Route::get('/web_redirect','TextController@wxWebRedirect');
 
 //TEST 路由分组
 //Route::prefix('/text')get()->group(function (){
