@@ -256,7 +256,7 @@ class TextController extends Controller
         //
         $array=[
 
-            'name'=>'商城',
+
             'button'=>[
                 [
               'type'=>'view',
@@ -268,7 +268,7 @@ class TextController extends Controller
                     'type'=>'click',
                     'name'=>'每日推荐',
                     'key'=>'daily',
-                ]
+                ],
             [
                 'name'=>'菜单',
                 "sub_button"=>[
