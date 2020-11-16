@@ -13,7 +13,7 @@
 
 //Route::get('/', function () {
 //    return view('welcome');
-//});
+//});,klkml,l,l
 Route::get('/register','index\LoginController@register'); //        //前台注册视图
 Route::post('/index/home','index\LoginController@home');              //注册执行
 Route::get('/user/active','index\LoginController@active');             //激活用户
@@ -63,7 +63,7 @@ Route::get('/custom','TextController@custom');  //自定义菜单
 Route::get('/web_auth','TextController@wxWebAuth');
 //微信重定向跳转地址
 Route::get('/web_redirect','TextController@wxWebRedirect');
-
+Route::get('/set_label',"TextController@set_label");  //创建标/5///  签
 //TEST 路由分组
 //Route::prefix('/text')get()->group(function (){
 //
@@ -71,7 +71,11 @@ Route::get('/web_redirect','TextController@wxWebRedirect');
 Route::get('getweather','TextController@getweather');
 Route::get('/guzzle',"TextController@guzzle");  //guzzle 测试  GET
 Route::get('/guzzle2',"TextController@guzzle2");  //guzzle 测试  POST
-
+Route::get('/uploads',"TextController@uploads");  //图文本
+//小程序接口
+Route::prefix('/api')->group(function (){
+   Route::get('/test','weixin\ApiController@test');
+});
 
 
 

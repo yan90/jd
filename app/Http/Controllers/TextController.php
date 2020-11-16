@@ -293,7 +293,7 @@ class TextController extends Controller
                     'name'=>'每日推荐',
                     'key'=>'daily',
                 ],
-                    
+
                 ]
             ]
 
@@ -380,6 +380,64 @@ class TextController extends Controller
             return redirect('/');
         }
     }
+    //创建标签
+    public function set_label(Request $request){
+    $label_name=$request->label_name;
+    //获取token
+        $access_token=$this->token();
+        $url="https://api.weixin.qq.com/cgi-bin/tags/create?access_token=".$access_token;
+//        dd($url);
+        $arr_xml=[
+          'tag'=>[
+              'name'=>$label_name,
+          ],
+        ];
+        $xml_arr=json_encode($arr_xml,256);
+//       dd($xml_arr);
+        $client=new Client();
+        //post请求(微信创建标签)
+        $response=$client->request('POST',$url,[
+            'verify'=>false,
+            'body'=>$xml_arr
+            ]);
+//        print_r($response) ;exit;
+        $callback=json_decode($response->getBody()->getContents());
+//        print_r($callback) ;exit;
+        if(isset($callback->tag)){
+            if(is_object($callback->tag)) {
+                return "添加菜单成功";
+            }
+            }else{
+                if($callback->errcode == 45157){
+                    return "标签名非法或和其他标签重名";
+                }else if($callback->errcode == 45158){
+                    return "标签名长度超过30个字节";
+                }else{
+                    return "创建的标签数过多，请注意不能超过100个";
+                }
+            }
 
+    }
+    //图文
+    public function uploads($toUser,$fromUser,$title,$description,$content,$url){
+        $template = "<xml>
+                              <ToUserName><![CDATA[%s]]></ToUserName>
+                              <FromUserName><![CDATA[%s]]></FromUserName>
+                              <CreateTime>%s</CreateTime>
+                              <MsgType><![CDATA[%s]]></MsgType>
+                              <ArticleCount><![CDATA[%s]]></ArticleCount>
+                              <Articles>
+                                <item>
+                                  <Title><![CDATA[%s]]></Title>
+                                  <Description><![CDATA[%s]]></Description>
+                                  <PicUrl><![CDATA[%s]]></PicUrl>
+                                  <Url><![CDATA[%s]]></Url>
+                                </item>
+                              </Articles>
+                            </xml>";
+        $info = sprintf($template);
+//        return $info;
+        echo $info;
+    }
 }
 
