@@ -75,7 +75,12 @@ Route::get('/uploads',"TextController@uploads");  //图文本
 //小程序接口
 Route::prefix('/api')->group(function (){
    Route::get('/test','weixin\ApiController@test');
+    Route::get('/goods_details','weixin\ApiController@goods_details');//小程序详情页接收id
+    Route::get('/goodsList','weixin\ApiController@goodsList');//下拉刷新
 });
+Route::post('/wx/xcxlogin','weixin\XcxController@login');  //微信登录小程序
+Route::get('/wx/circulation','weixin\XcxController@circulation');  //微信登录小程序
+Route::get('/wx/cart','weixin\XcxController@cart');  //微信小程序加入购物车
 
 
 
