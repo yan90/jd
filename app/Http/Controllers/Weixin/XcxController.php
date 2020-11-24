@@ -52,7 +52,15 @@ class XcxController extends Controller
             $token=sha1($data['openid'].$data['session_key'].mt_rand(0,999999));
            //保存token
             $redis_key='xcx_token:'.$token;
-            Redis::set($redis_key,time());
+            $loginInfo=[
+                'uid'=>'1234',
+                'user_name'=>'李明',
+                'login_time'=>time(),
+                'login_ip'=>$request->getClientIp(),
+                'token'=>$token,
+                'openid'=>$openid
+            ];
+            Redis::hMset($redis_key,$loginInfo);
             //设置过期时间
             Redis::expire($redis_key,7200);
             $response=[
@@ -74,17 +82,16 @@ class XcxController extends Controller
     }
     //加入购物车
     public function cart(Request $request){
-
-        $user_id=XcxuserModel::value('id');
-        if(empty($user_id)){
-            $data=[
-                'error'=>50002,
-                'msg'=>'请先登录',
-            ];
-            return $data;
-        }
-//        dd($user_id);
         $goods_id=$request->get('goods_id');
+        //获取token
+        $token=$request->get('token');
+//        dd($token);
+        $key="h:xcx:login:".$token;
+        //取出openid
+        $token=Redis::hgetall($key);
+        dd($token);
+        $user_id=XcxuserModel::where('openid',$token['openid'])->select('user_id')->first();
+//        dd($user_id);
 //        dd($goods_id);
         $data=[
             'goods_id'=>$goods_id,
