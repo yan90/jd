@@ -74,14 +74,14 @@ Route::get('/guzzle2',"TextController@guzzle2");  //guzzle 测试  POST
 Route::get('/uploads',"TextController@uploads");  //图文本
 //小程序接口
 Route::prefix('/api')->group(function (){
-   Route::get('/test','weixin\ApiController@test');
-    Route::get('/goods_details','weixin\ApiController@goods_details');//小程序详情页接收id
-    Route::get('/goodsList','weixin\ApiController@goodsList');//下拉刷新
+   Route::get('/test','Weixin\ApiController@test');
+    Route::get('/goods_details','Weixin\ApiController@goods_details');//小程序详情页接收id
+    Route::get('/goodsList','Weixin\ApiController@goodsList');//下拉刷新
 });
-Route::post('/wx/xcxlogin','weixin\XcxController@login');  //微信登录小程序
-Route::get('/wx/circulation','weixin\XcxController@circulation');  //微信登录小程序
-Route::get('/wx/cart','weixin\XcxController@cart');  //微信小程序加入购物车
-Route::get('/wx/cartlist','weixin\XcxController@cartlist');  //购物车列表
+Route::post('/wx/xcxlogin','Weixin\XcxController@login');  //微信登录小程序
+Route::get('/wx/circulation','Weixin\XcxController@circulation');  //微信登录小程序
+Route::get('/wx/cart','Weixin\XcxController@cart');  //微信小程序加入购物车
+Route::get('/wx/cartlist','Weixin\XcxController@cartlist');  //购物车列表
 
 
 
