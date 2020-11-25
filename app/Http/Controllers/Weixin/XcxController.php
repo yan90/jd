@@ -86,19 +86,20 @@ class XcxController extends Controller
         //获取token
         $token=$request->get('token');
 //        dd($token);
-        $key="h:xcx:login:".$token;
+//        dd($token);
+        $key="xcx_token:".$token;
+//        dd($key);
         //取出openid
         $token=Redis::hgetall($key);
-        dd($token);
-        $user_id=XcxuserModel::where('openid',$token['openid'])->select('user_id')->first();
+//        dd($token);
+        $user_id=XcxuserModel::where('openid',$token['openid'])->select('id')->first();
 //        dd($user_id);
-//        dd($goods_id);
+
         $data=[
             'goods_id'=>$goods_id,
             'add_time'=>time(),
-            'user_id'=>$user_id,
+            'user_id'=>$user_id->id,
         ];
-
        $res= XcxcartModel::insert($data);
        if($res){
            $respones=[
@@ -112,6 +113,10 @@ class XcxController extends Controller
            ];
        }
         return $respones;
+
+    }
+    //购物车列表
+    public function cartlist(){
 
     }
 }
