@@ -81,6 +81,7 @@ Route::prefix('/api')->group(function (){
 Route::post('/wx/xcxlogin','weixin\XcxController@login');  //微信登录小程序
 Route::get('/wx/circulation','weixin\XcxController@circulation');  //微信登录小程序
 Route::get('/wx/cart','weixin\XcxController@cart');  //微信小程序加入购物车
+Route::get('/wx/cartlist','weixin\XcxController@cartlist');  //购物车列表
 
 
 
