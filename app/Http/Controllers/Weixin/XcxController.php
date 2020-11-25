@@ -113,10 +113,39 @@ class XcxController extends Controller
            ];
        }
         return $respones;
-
     }
     //购物车列表
-//    public function cartlist(){
-//
-//    }
+    public function cartlist(Request $request){
+
+        $token=$request->get('token');
+        $key="xcx_token:".$token;
+        //取出openid
+        $token=Redis::hgetall($key);
+        $user_id=XcxuserModel::where('openid',$token['openid'])->select('id')->first();
+//        echo ($user_id);exit;
+        $goods = XcxcartModel::where(['user_id'=>$user_id->id])->get();
+//        dd($goods);
+        if($goods)      //购物车有商品
+        {
+            $goods = $goods->toArray();
+            foreach($goods as $k=>&$v)
+            {
+                $g = GoodsModel::find($v['goods_id']);
+                $v['goods_name'] = $g->goods_name;
+            }
+        }else{          //购物车无商品
+            $goods = [];
+        }
+
+        //echo '<pre>';print_r($goods);echo '</pre>';die;
+        $response = [
+            'errno' => 0,
+            'msg'   => 'ok',
+            'data'  => [
+                'list'  => $goods
+            ]
+        ];
+
+        return $response;
+    }
 }

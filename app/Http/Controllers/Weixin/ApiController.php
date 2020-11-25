@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Weixin;
 use App\Http\Controllers\Controller;
 use App\Model\GoodsModel;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Redis;
+use App\Model\XcxCollectModel;
+use App\model\XcxuserModel;
 class ApiController extends Controller
 {
 //    public function __construct()
@@ -49,5 +51,67 @@ class ApiController extends Controller
             ]
         ];
         return $response;
+    }
+    //收藏
+    public function add_fav(Request $request){
+        $goods_id=$request->get('id');
+//        $token=$request->get('token');
+//        echo $token;
+        //加入收藏放入redis有序集合
+//        $user_id=8;
+//        $redis_key='ss:goods:fav:.user_id'; //用户收藏有序集合
+//        Redis::Zadd($redis_key,time(),$goods_id); //将商品id加入有序值，并给排序值
+        $token=$request->get('token');
+        $key="xcx_token:".$token;
+        //取出openid
+        $token=Redis::hgetall($key);
+        $user_id=XcxuserModel::where('openid',$token['openid'])->select('id')->first();
+        $data=[
+            'goods_id'=>$goods_id,
+            'add_time'=>time(),
+            'user_id'=>$user_id->id
+        ];
+        $res=XcxCollectModel::insert($data);
+
+        if($res){
+            $respones=[
+                'error'=>0,
+                'msg'=>'收藏成功',
+            ];
+        }else{
+            $respones=[
+                'error'=>50001,
+                'msg'=>'收藏失败',
+            ];
+        }
+        return $respones;
+//        $response=[
+//            'errno'=>0,
+//            'msg'=>'收藏成功',
+//        ];
+//        return $response;
+    }
+    //取消收藏
+    public function no_fav(Request $request){
+        $goods_id=$request->get('id');
+        $token=$request->get('token');
+        $key="xcx_token:".$token;
+        $token=Redis::hgetall($key);
+//        echo $token;exit;
+        $user_id=XcxuserModel::where('openid',$token['openid'])->value('id');
+        $res=XcxCollectModel::where(['user_id'=>$user_id,'goods_id'=>$goods_id])->delete();
+        if($res){
+            $respones=[
+                'error'=>0,
+                'msg'=>'取消收藏成功',
+            ];
+        }else{
+            $respones=[
+                'error'=>50001,
+                'msg'=>'取消收藏失败',
+            ];
+        }
+        return $respones;
+
     }
 }

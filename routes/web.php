@@ -76,6 +76,8 @@ Route::get('/uploads',"TextController@uploads");  //图文本
 Route::prefix('/api')->group(function (){
    Route::get('/test','Weixin\ApiController@test');
     Route::get('/goods_details','Weixin\ApiController@goods_details');//小程序详情页接收id
+    Route::get('/add_fav','Weixin\ApiController@add_fav');//收藏
+    Route::get('/no_fav','Weixin\ApiController@no_fav');//取消收藏
     Route::get('/goodsList','Weixin\ApiController@goodsList');//下拉刷新
 });
 Route::post('/wx/xcxlogin','Weixin\XcxController@login');  //微信登录小程序
