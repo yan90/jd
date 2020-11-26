@@ -28,13 +28,45 @@ class ApiController extends Controller
     }
     //小程序详情页接收id
     public function goods_details(Request $request){
-        $token=$request->get('access_token');
         //验证token是否有效
-        echo $token;
+//        echo $token;
     $goods_id=$request->get('goods_id');
-//    echo $goods_id;exit;
-    $detail=GoodsModel::where('goods_id',$goods_id)->first()->toArray();
-    return $detail;
+//    dd($goods_id);
+    if (!empty($goods_id)){
+        $detail=GoodsModel::where('goods_id',$goods_id)->first()->toArray();
+        //默认用户为未收藏
+        $iscollect=true;
+        //查询商品有没有被用户收藏
+        $token=$request->get('token');
+    if(!empty($token)){
+        $key="xcx_token:".$token;
+        //取出openid
+        $token1=Redis::hgetall($key);
+        $openid=$token1['openid'];
+        $user_id=XcxuserModel::where('openid',$openid)->select('id')->first()->toArray();
+        $user_id=$user_id['id'];
+        $collectInfo=XcxCollectModel::where('user_id',$user_id)->select('goods_id')->get();
+        if(is_object($collectInfo)){
+            $collectInfo=$collectInfo->toArray();
+        }
+//        dd($collectInfo);
+        foreach($collectInfo as $k=>$v){
+            if($v['goods_id']==$goods_id){
+                //如果当前访问的商品id====收藏表中的id   收藏为true
+                $iscollect=false;
+            }
+        }
+    }
+    $result=[
+        'error'=>0,
+        'msg'=>'ok',
+        'data'=>[
+            'list'=>$detail,
+            'iscollect'=>$iscollect
+        ]
+    ];
+    return $result;
+    }
     }
     //下拉刷新
     public function goodsList(Request $request){
