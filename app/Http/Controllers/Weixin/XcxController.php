@@ -151,11 +151,25 @@ class XcxController extends Controller
     }
     //全部删除
     public function alldelete(Request $request){
+        $goods_id=$request->get('goods_id');
         $token=$request->get('token');
 //        dd($token);
         $key="xcx_token:".$token;
         //取出openid
         $token=Redis::hgetall($key);
         $user_id=XcxuserModel::where('openid',$token['openid'])->select('id')->first();
+       $cart= XcxcartModel::where(['user_id'=>$user_id,'goods_id'=>$goods_id])->delete($goods_id);
+        if($cart){
+            $data=[
+                'errno'=>200,
+                'msg'=>'删除成功',
+            ];
+        }else{
+            $data=[
+                'errno'=>50001,
+                'msg'=>'删除失败',
+            ];
+        }
+        return $data;
     }
 }
