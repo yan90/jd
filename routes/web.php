@@ -84,7 +84,7 @@ Route::post('/wx/xcxlogin','Weixin\XcxController@login');  //微信登录小程�
 Route::get('/wx/circulation','Weixin\XcxController@circulation');  //微信登录小程序
 Route::get('/wx/cart','Weixin\XcxController@cart');  //微信小程序加入购物车
 Route::get('/wx/cartlist','Weixin\XcxController@cartlist');  //购物车列表
-
+Route::get('/wx/alldelete','Weixin\XcxController@alldelete');  //全部删除
 
 
 
