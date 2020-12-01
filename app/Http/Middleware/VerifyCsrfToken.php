@@ -22,6 +22,8 @@ class VerifyCsrfToken extends Middleware
         //
         '/wx',
         '/custom',
-        '/wx/xcxlogin'
+        '/wx/xcxlogin',
+        '/wx/incr',
+        '/wx/decr'
     ];
 }

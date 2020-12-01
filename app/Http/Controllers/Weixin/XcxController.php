@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Weixin;
 
 use App\Http\Controllers\Controller;
+use App\Model\CartModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use App\Model\GoodsModel;
@@ -94,30 +95,38 @@ class XcxController extends Controller
 //        dd($token);
         $user_id=XcxuserModel::where('openid',$token['openid'])->select('id')->first();
 //        dd($user_id);
+        $aa=XcxcartModel::where(['goods_id'=>$goods_id,'user_id'=>$user_id->id])->first();
+//        dd($aa);
+        if($aa){
+            XcxcartModel::where('goods_id',$goods_id)->increment('goods_num');
+        }else{
+            $data=[
+                'goods_id'=>$goods_id,
+                'add_time'=>time(),
+                'user_id'=>$user_id->id,
+            ];
+            $res= XcxcartModel::insert($data);
+            if($res){
+                $respones=[
+                    'error'=>0,
+                    'msg'=>'加入购物车成功',
+                ];
+            }else{
+                $respones=[
+                    'error'=>50001,
+                    'msg'=>'加入失败',
+                ];
+            }
+            return $respones;
+        }
 
-        $data=[
-            'goods_id'=>$goods_id,
-            'add_time'=>time(),
-            'user_id'=>$user_id->id,
-        ];
-       $res= XcxcartModel::insert($data);
-       if($res){
-           $respones=[
-               'error'=>0,
-               'msg'=>'加入购物车成功',
-           ];
-       }else{
-           $respones=[
-               'error'=>50001,
-               'msg'=>'加入失败',
-           ];
-       }
-        return $respones;
     }
     //购物车列表
     public function cartlist(Request $request){
-
+//        $goods_id=$request->get(goods_id);
+//        dd($goods_id);
         $token=$request->get('token');
+
         $key="xcx_token:".$token;
         //取出openid
         $token=Redis::hgetall($key);
@@ -158,7 +167,12 @@ class XcxController extends Controller
         //取出openid
         $token=Redis::hgetall($key);
         $user_id=XcxuserModel::where('openid',$token['openid'])->select('id')->first();
-       $cart= XcxcartModel::where(['user_id'=>$user_id,'goods_id'=>$goods_id])->delete($goods_id);
+        $where=[
+            ['user_id'=>$user_id->user_id],
+            ['goods_id'=>$goods_id]
+        ];
+       $cart= XcxcartModel::where($where)->delete();
+//       dd($cart);
         if($cart){
             $data=[
                 'errno'=>200,
@@ -171,5 +185,52 @@ class XcxController extends Controller
             ];
         }
         return $data;
+    }
+    //单个删除
+    public function dandelete(Request $request){
+    $goods_id=$request->get('goods_id');
+//    echo $goods_id;
+        $delete=XcxcartModel::where('goods_id',$goods_id)->first()->delete();
+        if($delete){
+            $data=[
+                'errno'=>200,
+                'msg'=>'删除成功'
+            ];
+            return $data;
+        }
+    }
+    //点+加1
+    public function incr(Request $request){
+        $goods_id=$request->post('goods_id');
+//        dd($goods_id);
+        $token=$request->get('token');
+//        dd($token);
+        $key="xcx_token:".$token;
+        //取出openid
+        $token=Redis::hgetall($key);
+        $user_id=XcxuserModel::where('openid',$token['openid'])->select('id')->first()->toArray();
+//        dd($user_id);
+        $num=$request->post('num',1);
+        XcxcartModel::where(['goods_id'=>$goods_id,'user_id'=>$user_id])->update(['goods_num'=>$num]);
+    }
+    //点击-1
+    public function decr(Request $request){
+        $goods_id=$request->post('goods_id');
+//        dd($goods_id);
+        $token=$request->get('token');
+//        dd($token);
+        $key="xcx_token:".$token;
+        //取出openid
+        $token=Redis::hgetall($key);
+        $user_id=XcxuserModel::where('openid',$token['openid'])->select('id')->first()->toArray();
+//        dd($user_id);
+        $num=$request->post('num',1);
+        $data=XcxcartModel::where(['goods_id'=>$goods_id,'user_id'=>$user_id])->value('goods_num');
+//        dd($data);
+        if($data){
+            $data=$data-1;
+            XcxcartModel::where(['goods_id'=>$goods_id,'user_id'=>$user_id])->update(['goods_num'=>$data]);
+            return $data;
+        }
     }
 }
